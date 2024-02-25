@@ -1,0 +1,49 @@
+class Inspection:
+    def __init__(self, address, inspector, issues=[]):
+        self.address = address
+        self.inspector = inspector
+        self.issues = issues
+
+    def add_issue(self, issue):
+        self.issues.append(issue)
+
+    def display_inspection(self):
+        print(f"Inspection at {self.address} by {self.inspector}")
+        if self.issues:
+            print("Issues:")
+            for issue in self.issues:
+                print(f"- {issue}")
+        else:
+            print("No issues found during inspection.")
+
+class InspectionPlatform:
+    def __init__(self):
+        self.inspections = []
+
+    def schedule_inspection(self, address, inspector):
+        inspection = Inspection(address, inspector)
+        self.inspections.append(inspection)
+        return inspection
+
+    def get_inspection_by_address(self, address):
+        for inspection in self.inspections:
+            if inspection.address == address:
+                return inspection
+        return None
+
+# Example Usage
+if __name__ == "__main__":
+    platform = InspectionPlatform()
+
+    # Schedule Inspections
+    inspection1 = platform.schedule_inspection("123 Main St", "John Doe")
+    inspection2 = platform.schedule_inspection("456 Oak Ave", "Jane Smith")
+
+    # Add Issues
+    inspection1.add_issue("Cracks in the foundation")
+    inspection2.add_issue("Faulty wiring")
+
+    # Display Inspections
+    inspection1.display_inspection()
+    print("\n")
+    inspection2.display_inspection()
